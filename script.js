@@ -34,6 +34,32 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize Quizzes
     initializeQuizzes();
+
+    // Add mobile menu toggle functionality
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const nav = document.querySelector('nav');
+    
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+            nav.classList.toggle('open');
+        });
+    }
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (nav.classList.contains('open') && !nav.contains(event.target) && event.target !== mobileMenuToggle) {
+            nav.classList.remove('open');
+        }
+    });
+    
+    // Close menu when a link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (nav.classList.contains('open')) {
+                nav.classList.remove('open');
+            }
+        });
+    });
 });
 
 // Flashcard functionality
